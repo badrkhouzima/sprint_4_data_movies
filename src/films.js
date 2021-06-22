@@ -40,6 +40,7 @@ function orderAlphabetically(array) {
   films =  array.slice().sort();
   films = films.map(elem => elem.title);
   films = films.sort((a,b) => a.localeCompare(b));
+  films = films.splice(0, 20);
   //const sort = str => str.split('').sort((a, b) => a.localeCompare(b)).join('');
  return films;
 }
