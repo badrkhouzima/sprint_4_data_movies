@@ -2002,7 +2002,7 @@ const movies = [
   }
 ];
 
-/* export default films; */
-if (typeof module !== 'undefined') {
-  module.exports = movies;
-}
+//export.movies = movies;
+module.exports = movies;
+
+
