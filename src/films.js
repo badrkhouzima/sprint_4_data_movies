@@ -36,20 +36,61 @@ function moviesAverageOfDirector(array, director) {
 
 // Exercise 4:  Alphabetic order by title
 function orderAlphabetically(array) {
-  let films= [];
-  films =  array.slice().sort();
-  films = films.map(elem => elem.title);
-  films = films.sort((a,b) => a.localeCompare(b));
+  let films = [];
+  films = array.slice().sort();
+  films = films.map((elem) => elem.title);
+  films = films.sort((a, b) => a.localeCompare(b));
   films = films.splice(0, 20);
   //const sort = str => str.split('').sort((a, b) => a.localeCompare(b)).join('');
- return films;
+  return films;
 }
 
 // Exercise 5: Order by year, ascending
-function orderByYear() {}
+function orderByYear(array) {
+  let films = [];
+
+  //fimls = films.map((elem) => elem.year);
+  //films = films.sort((a,b)=> a.year-b.year );
+  //fimls = films.sort((a, b) => a.year == b.year ? a.title.localeCompare(b.title)  :  a.year< b.year ? -1 : 1 );
+  films = array.map((elem) => Object.fromEntries(Object.entries(elem)));
+  films = films.sort(function (a, b) {
+    if (a.year === b.year) {
+      return a.title.localeCompare(b.title);
+    }
+    return a.year > b.year ? 1 : -1;
+  });
+
+  return films;
+}
 
 // Exercise 6: Calculate the average of the movies in a category
-function moviesAverageByCategory() {}
+function moviesAverageByCategory(movies, genreCat) {
+  let score = 0;
+  function moviesAverageOfDirector(movies, genreCat) {
+    function getMoviesFromDirector(movies, genreCat) {
+      let result = [];
+      result = movies.filter((elem) => elem.genre == genreCat);
+      return result;
+    }
+    let genreMovies = getMoviesFromDirector(movies, genreCat);
+    let scores = genreMovies.map((elem) => elem.score);
+    console.log("acces scores", scores);
+     let emptyScores = scores.slice().filter((elem) => elem == "");
+    let undefinedScores = scores.slice().filter((elem) => elem == undefined);
+    let scoreReduced = scores.reduce(
+      (accummulator, value) => accummulator + value
+    );
+    if( undefinedScores.length > 0){
+      score = parseFloat(scoreReduced)/scores.length;
+    } else {
+      score = parseFloat(scoreReduced) / ((scores.length)-(emptyScores.length));
+    }
+        score.toFixed(2);
+    return score;
+  }
+  score = moviesAverageOfDirector(movies, genreCat);
+  return score;
+}
 
 // Exercise 7: Modify the duration of movies to minutes
 function hoursToMinutes() {}
