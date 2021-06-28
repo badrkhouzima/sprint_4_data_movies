@@ -48,10 +48,6 @@ function orderAlphabetically(array) {
 // Exercise 5: Order by year, ascending
 function orderByYear(array) {
   let films = [];
-
-  //fimls = films.map((elem) => elem.year);
-  //films = films.sort((a,b)=> a.year-b.year );
-  //fimls = films.sort((a, b) => a.year == b.year ? a.title.localeCompare(b.title)  :  a.year< b.year ? -1 : 1 );
   films = array.map((elem) => Object.fromEntries(Object.entries(elem)));
   films = films.sort(function (a, b) {
     if (a.year === b.year) {
